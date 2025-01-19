@@ -17,7 +17,11 @@ export class UserRepository {
   }
 
   async create(user: User): Promise<User> {
-    const userDocument = new this.userModel(user);
+    const userDocument = new this.userModel({
+      ...user,
+      password: user.getPassword(),
+    });
+    console.log('User Document : ', userDocument);
     const savedUser = await userDocument.save();
     return this.toDomainEntity(savedUser);
   }

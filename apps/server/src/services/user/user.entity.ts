@@ -5,4 +5,15 @@ export class User {
     public readonly email: string,
     private _password: string,
   ) {}
+
+  getPassword() {
+    return this._password;
+  }
+
+  getPublicFeils(): Omit<User, '_password'> {
+    return {
+      ...this,
+      _password: undefined,
+    };
+  }
 }
